@@ -49,3 +49,21 @@ CLS was initially trained for classification-related tasks, so without fine-tuni
 By default, Sentence‑Transformers uses mean pooling.
 You can switch to CLS pooling (or hybrids) by customizing the Pooling layer.
 Mean pooling typically gives better performance for sentence embeddings out of the box.
+
+Why Prefixing Matters in intfloat/multilingual-e5-small
+When using the intfloat/multilingual-e5-small model for retrieval tasks, it's essential to prefix inputs with "query: " for search queries and "passage: " for documents or content. This is not optional—it is a crucial design feature of how the model was trained using contrastive learning.
+
+🎯 Key Reasons to Prefix
+Role Awareness
+Prefixing enables the model to understand the role of each input. During training, the E5 architecture distinguishes between queries and passages. The prefix helps the model adjust its internal attention and pooling strategies based on whether the input is a search query or a document.
+
+Improved Embedding Alignment
+Clearly marked inputs ensure that embeddings from queries and passages are more semantically aligned. This alignment increases the chance of successful retrieval since both embeddings are positioned closer in the vector space when they share meaning.
+
+Avoiding Performance Drop
+Omitting these prefixes can cause a noticeable decline in accuracy for retrieval or ranking tasks. The model may misinterpret the role of an input, leading to poor embedding quality and reduced effectiveness in downstream tasks like search, recommendation, or ranking.
+
+
+
+
+
