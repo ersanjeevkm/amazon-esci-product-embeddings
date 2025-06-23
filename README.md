@@ -21,3 +21,31 @@ Use:
 jinaai/jina-embedding-v2-small-en for English
 intfloat/multilingual-e5-small for Spanish & Japanese
 
+The choice of library huggingface's transformers vs sentece-tranformers, they are not choice
+they are for different task, and one will perform well in one area than others
+
+Transformers requires manual pooling and often yields non-ideal sentence embeddings (e.g., using the CLS token out-of-the-box) 
+
+Sentence‑Transformers:
+Automatically integrates pooling (mean/max/CLS).
+Fine-tunes underlying Transformers with training regimes (e.g., siamese networks and contrastive loss) to optimize embedding quality for similarity tasks 
+
+📌 TL;DR
+Use Transformers for broad NLP tasks: token-level outputs, classification, generation.
+Use Sentence‑Transformers when you need high-quality sentence embeddings—they’re optimized, easy to use, and efficient for semantic tasks.
+
+The Sentence‑Transformers library uses a flexible Pooling module that supports multiple strategies:
+Mean pooling (the default): computes the average of all token embeddings, offering a strong and reliable representation for sentence-level embeddings.
+
+CLS pooling (optional): takes just the [CLS] token embedding. You can enable it via setting pooling_mode="cls" or using pooling_mode_cls_token=True in the Pooling configuration.
+Other modes: max pooling, mean_sqrt_len, weighted mean, last token, etc. 
+
+🧠 Why mean pooling is preferred
+Empirical results show mean pooling outperforms CLS pooling for semantic similarity and retrieval tasks, since pooling uses context from all tokens, not just one.
+
+CLS was initially trained for classification-related tasks, so without fine-tuning, it may not capture full sentence semantics as effectively.
+
+✅ Summary
+By default, Sentence‑Transformers uses mean pooling.
+You can switch to CLS pooling (or hybrids) by customizing the Pooling layer.
+Mean pooling typically gives better performance for sentence embeddings out of the box.
