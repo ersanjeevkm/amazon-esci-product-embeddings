@@ -63,7 +63,8 @@ Clearly marked inputs ensure that embeddings from queries and passages are more 
 Avoiding Performance Drop
 Omitting these prefixes can cause a noticeable decline in accuracy for retrieval or ranking tasks. The model may misinterpret the role of an input, leading to poor embedding quality and reduced effectiveness in downstream tasks like search, recommendation, or ranking.
 
+Choice of index FAISS: https://chatgpt.com/c/685aae75-ad90-8001-b75f-2bdb6f512c65
+HNSW params: https://chatgpt.com/c/685acbee-9608-8001-808b-b9346ea50b52
 
-
-
+Use IndexIDMap along with the faiss index 
 
